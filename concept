@@ -1,0 +1,17 @@
+frameworks
+Django
+django rest
+
+ci
+Travis ou circle ci
+
+docker
+
+pipenv e requirement
+
+
+pytest
+pytest-sugar
+pytest-mock
+pylint
+
