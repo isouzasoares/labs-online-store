@@ -2,7 +2,7 @@
 from django.db import models
 
 
-class Client(models.Model):
+class Product(models.Model):
     brand = models.CharField(max_length=150)
     title = models.CharField(max_length=70)
     price = models.DecimalField(max_digits=6, decimal_places=2)

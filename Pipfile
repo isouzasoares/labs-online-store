@@ -9,6 +9,7 @@ django-rest-framework = "*"
 dj-database-url = "*"
 pylint = "*"
 "flake8" = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 pytest = "*"
