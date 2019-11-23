@@ -10,6 +10,9 @@ dj-database-url = "*"
 pylint = "*"
 "flake8" = "*"
 djangorestframework-simplejwt = "*"
+pyaml = "*"
+uritemplate = "*"
+drf-yasg = "*"
 
 [dev-packages]
 pytest = "*"
