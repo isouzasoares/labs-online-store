@@ -13,4 +13,4 @@ class ClientCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Client
-        exclude = ("is_staff", "is_superuser", "date_joined",)
+        fields = ("name", "email", "password",)
