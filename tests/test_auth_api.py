@@ -1,3 +1,5 @@
+import pytest
+
 
 def test_get_token(client, django_user_model):
     data = {"email": "user1@user.com", "password": "bar"}
@@ -22,3 +24,11 @@ def test_get_token_unauthorized(db, client):
     data = {"email": "user1@user.com", "password": "bar"}
     response = client.post('/api/token/', data=data)
     assert response.status_code == 401
+
+
+@pytest.mark.parametrize("swagger_endswith",
+                         [".yaml", ".json", "/"])
+def test_swagger(client, swagger_endswith):
+    """Test"""
+    response = client.get(f'/api/swagger{swagger_endswith}')
+    assert response.status_code == 200
