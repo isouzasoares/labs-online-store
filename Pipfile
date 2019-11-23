@@ -13,6 +13,7 @@ djangorestframework-simplejwt = "*"
 pyaml = "*"
 uritemplate = "*"
 drf-yasg = "*"
+model-bakery = "*"
 
 [dev-packages]
 pytest = "*"
