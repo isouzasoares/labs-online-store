@@ -13,7 +13,7 @@ WORKDIR /app
 # Install dependencies
 RUN pip install pipenv
 COPY Pipfile Pipfile.lock /app/
-RUN pipenv install
+RUN pipenv install --dev
 
 # Copy project
 COPY . /app/

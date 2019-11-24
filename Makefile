@@ -17,6 +17,7 @@ help:
 	@echo "   5. make test_cov 			- Run tests"
 	@echo "   6. make black 			- Run black"
 	@echo "   7. make lint_report		- Run lint report"
+	@echo "   8. make docker_build		- Run docker compose build"
 	@echo ""
 	@echo ""
 
@@ -56,10 +57,15 @@ test_cov:
 
 .PHONY: test_cov_html
 test_cov_html:
-	pipenv run pytest --cov --cov-report term --cov-report=html tests/ */tests/
+	pipenv run pytest --cov=. --cov-report term --cov-report=html tests/ */tests/
 
 
 .PHONY: lint_report
 lint_report:
 	find . -iname "*.py" | grep -v test | grep -v alembic | grep -v "resources/" | xargs pipenv run pylint --reports=n --msg-template "{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" > pylint-report.txt || exit 0;
 	cat pylint-report.txt
+
+docker_build: ## Build the container
+	docker-compose run web pipenv run python /app/manage.py migrate --noinput
+	docker-compose run web pipenv run pytest --cov=. tests/ */tests/
+	docker-compose up -d --build
