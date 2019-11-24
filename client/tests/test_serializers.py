@@ -1,6 +1,6 @@
 import pytest
 from model_bakery import baker
-from client.serializer import ClientCreateSerializer
+from client.serializers import ClientCreateSerializer
 from client.models import Client
 
 

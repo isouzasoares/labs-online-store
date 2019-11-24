@@ -3,7 +3,7 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from .models import Client
-from .serializer import ClientUpdateSerializer, ClientCreateSerializer
+from .serializers import ClientUpdateSerializer, ClientCreateSerializer
 
 
 class ClientCreateView(generics.CreateAPIView):
