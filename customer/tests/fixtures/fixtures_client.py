@@ -24,4 +24,3 @@ def mock_token(django_user_model):
             'HTTP_AUTHORIZATION': f'Bearer {token.validated_data["access"]}'
         }
         return headers
-    return {}

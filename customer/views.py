@@ -17,7 +17,8 @@ class CustomerCreateView(generics.CreateAPIView):
         Customer.objects.create_user(**data)
 
 
-class CustomerUpdateView(generics.RetrieveUpdateDestroyAPIView):
+class CustomerRetrieveUpdateDestroyView(
+        generics.RetrieveUpdateDestroyAPIView):
     """Update client generic view"""
     permission_classes = [IsAuthenticated]
     serializer_class = CustomerUpdateSerializer
