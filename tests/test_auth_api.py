@@ -18,8 +18,9 @@ def test_refresh_token(client, django_user_model):
     url = reverse("token_obtain_pair")
     response = client.post(url, data=data)
     response = response.json()
-    response = client.post(reverse("token_refresh"),
-                           data={"refresh": response["refresh"]})
+    response = client.post(
+        reverse("token_refresh"), data={"refresh": response["refresh"]}
+    )
     assert response.status_code == 200
 
 
@@ -29,9 +30,8 @@ def test_get_token_unauthorized(db, client):
     assert response.status_code == 401
 
 
-@pytest.mark.parametrize("swagger_endswith",
-                         [".yaml", ".json", "/"])
+@pytest.mark.parametrize("swagger_endswith", [".yaml", ".json", "/"])
 def test_swagger(client, swagger_endswith):
     """Test"""
-    response = client.get(f'/api/swagger{swagger_endswith}')
+    response = client.get(f"/api/swagger{swagger_endswith}")
     assert response.status_code == 200

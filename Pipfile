@@ -20,6 +20,8 @@ pytest = "*"
 pytest-django = "*"
 pytest-sugar = "*"
 pytest-cov = "*"
+black = "==19.3b0"
+pylint = "*"
 
 [requires]
 python_version = "3.7"

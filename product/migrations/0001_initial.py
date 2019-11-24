@@ -7,19 +7,26 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Client',
+            name="Client",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('brand', models.CharField(max_length=150)),
-                ('title', models.CharField(max_length=70)),
-                ('price', models.DecimalField(decimal_places=2, max_digits=6)),
-                ('image', models.URLField(blank=True, null=True)),
-                ('reviewScore', models.FloatField(default=0.0)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("brand", models.CharField(max_length=150)),
+                ("title", models.CharField(max_length=70)),
+                ("price", models.DecimalField(decimal_places=2, max_digits=6)),
+                ("image", models.URLField(blank=True, null=True)),
+                ("reviewScore", models.FloatField(default=0.0)),
             ],
-        ),
+        )
     ]

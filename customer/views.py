@@ -8,6 +8,7 @@ from .serializers import CustomerUpdateSerializer, CustomerCreateSerializer
 
 class CustomerCreateView(generics.CreateAPIView):
     """Create client generic view"""
+
     serializer_class = CustomerCreateSerializer
 
     def perform_create(self, serializer):
@@ -17,9 +18,9 @@ class CustomerCreateView(generics.CreateAPIView):
         Customer.objects.create_user(**data)
 
 
-class CustomerRetrieveUpdateDestroyView(
-        generics.RetrieveUpdateDestroyAPIView):
+class CustomerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     """Update client generic view"""
+
     permission_classes = [IsAuthenticated]
     serializer_class = CustomerUpdateSerializer
 

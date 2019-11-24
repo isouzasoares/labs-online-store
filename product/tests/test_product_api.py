@@ -58,7 +58,7 @@ def test_product_list_with_pagination(db, client):
 def test_product_get(db, client):
     """Test"""
     product = baker.make(Product)
-    url = reverse("product:get", args=(product.pk, ))
+    url = reverse("product:get", args=(product.pk,))
     response = client.get(url)
     data = response.json()
     assert response.status_code == 200
@@ -67,6 +67,6 @@ def test_product_get(db, client):
 
 def test_product_get_error(db, client):
     """Test"""
-    url = reverse("product:get", args=(2, ))
+    url = reverse("product:get", args=(2,))
     response = client.get(url)
     assert response.status_code == 404

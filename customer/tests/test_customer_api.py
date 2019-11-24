@@ -19,9 +19,7 @@ def test_create_customer_error(client, db, mock_customer):
 def test_get_customer_success(client, db, mock_token):
     """Test"""
     url = reverse("customer:crud")
-    response = client.get(url,
-                          content_type='application/json',
-                          **mock_token)
+    response = client.get(url, content_type="application/json", **mock_token)
     data = response.json()
     assert response.status_code == 200
     assert data
@@ -34,10 +32,10 @@ def test_update_customer_not_authorized(client, db):
     """Test"""
     url = reverse("customer:crud")
     mock_customer = {"name": "update_client"}
-    mock_token = {'HTTP_AUTHORIZATION': '123'}
-    response = client.put(url, data=mock_customer,
-                          content_type='application/json',
-                          **mock_token)
+    mock_token = {"HTTP_AUTHORIZATION": "123"}
+    response = client.put(
+        url, data=mock_customer, content_type="application/json", **mock_token
+    )
     assert response.status_code == 401
 
 
@@ -45,9 +43,9 @@ def test_update_customer_success(client, db, mock_token):
     """Test"""
     url = reverse("customer:crud")
     mock_customer = {"name": "update_client"}
-    response = client.put(url, data=mock_customer,
-                          content_type='application/json',
-                          **mock_token)
+    response = client.put(
+        url, data=mock_customer, content_type="application/json", **mock_token
+    )
     assert response.status_code == 200
     assert response.json()["name"] == mock_customer["name"]
 
@@ -56,8 +54,9 @@ def test_update_customer_error(client, db, mock_token):
     """Test"""
     url = reverse("customer:crud")
     mock_customer = {"name": ""}
-    response = client.put(url, content_type='application/json',
-                          data=mock_customer, **mock_token)
+    response = client.put(
+        url, content_type="application/json", data=mock_customer, **mock_token
+    )
     assert response.status_code == 400
 
 
@@ -65,9 +64,9 @@ def test_patch_customer_success(client, db, mock_token):
     """Test"""
     url = reverse("customer:crud")
     mock_customer = {"name": "update_client"}
-    response = client.patch(url, data=mock_customer,
-                            content_type='application/json',
-                            **mock_token)
+    response = client.patch(
+        url, data=mock_customer, content_type="application/json", **mock_token
+    )
     assert response.status_code == 200
     assert response.json()["name"] == mock_customer["name"]
 
@@ -76,35 +75,37 @@ def test_patch_customer_error(client, db, mock_token):
     """Test"""
     url = reverse("customer:crud")
     mock_customer = {"name": ""}
-    response = client.patch(url, content_type='application/json',
-                            data=mock_customer, **mock_token)
+    response = client.patch(
+        url, content_type="application/json", data=mock_customer, **mock_token
+    )
     assert response.status_code == 400
 
 
 def test_delete_not_authorized(client, db, mock_token):
     """Test"""
     url = reverse("customer:crud")
-    mock_token = {'HTTP_AUTHORIZATION': '123'}
-    response = client.delete(url, content_type='application/json',
-                             **mock_token)
+    mock_token = {"HTTP_AUTHORIZATION": "123"}
+    response = client.delete(
+        url, content_type="application/json", **mock_token
+    )
     assert response.status_code == 401
 
 
 def test_delete_success(client, db, mock_token):
     """Test"""
     url = reverse("customer:crud")
-    response = client.delete(url, content_type='application/json',
-                             **mock_token)
+    response = client.delete(
+        url, content_type="application/json", **mock_token
+    )
     assert response.status_code == 204
 
 
 def test_delete_and_access_item(client, db, mock_token):
     """Test"""
     url = reverse("customer:crud")
-    delete_resp = client.delete(url, content_type='application/json',
-                                **mock_token)
-    response = client.get(url,
-                          content_type='application/json',
-                          **mock_token)
+    delete_resp = client.delete(
+        url, content_type="application/json", **mock_token
+    )
+    response = client.get(url, content_type="application/json", **mock_token)
     assert delete_resp.status_code == 204
     assert response.status_code == 401

@@ -10,14 +10,20 @@ class CustomerBaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Customer
-        fields = ("id", "name", "email",)
+        fields = ("id", "name", "email")
 
 
 class CustomerCreateSerializer(CustomerBaseSerializer):
     """Serializer for create user"""
-    email = serializers.EmailField(validators=[UniqueValidator(
-        queryset=Customer.objects.all(),
-        message="There is already an account with this email")])
+
+    email = serializers.EmailField(
+        validators=[
+            UniqueValidator(
+                queryset=Customer.objects.all(),
+                message="There is already an account with this email",
+            )
+        ]
+    )
 
     class Meta:
         model = Customer
@@ -26,4 +32,5 @@ class CustomerCreateSerializer(CustomerBaseSerializer):
 
 class CustomerUpdateSerializer(CustomerBaseSerializer):
     """Serializer for user"""
+
     email = serializers.ReadOnlyField()

@@ -3,9 +3,9 @@
 from django.urls import path
 from .views import GetProductView, ListProductView
 
-app_name = 'product'
+app_name = "product"
 
 urlpatterns = [
-    path('', ListProductView.as_view(), name='list'),
-    path('<pk>', GetProductView.as_view(), name='get')
+    path("", ListProductView.as_view(), name="list"),
+    path("<pk>", GetProductView.as_view(), name="get"),
 ]

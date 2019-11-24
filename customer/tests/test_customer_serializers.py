@@ -33,5 +33,6 @@ def test_client_is_unique(db, mock_customer):
     mock_customer["email"] = mock_model.email
     serializer = CustomerCreateSerializer(data=mock_customer)
     assert not serializer.is_valid()
-    assert "There is already an account with this email" \
-           in str(serializer.errors["email"][0])
+    assert "There is already an account with this email" in str(
+        serializer.errors["email"][0]
+    )
