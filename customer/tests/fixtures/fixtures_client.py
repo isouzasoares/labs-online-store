@@ -3,7 +3,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 @pytest.fixture
-def mock_client():
+def mock_customer():
     """Dict with client mock"""
     return {"email": "test@test.com",
             "name": "test",

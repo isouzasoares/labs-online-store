@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'product',
-    'client'
+    'customer'
 ]
 
 MIDDLEWARE = [
@@ -85,7 +85,7 @@ DATABASES = {
     'default':  dj_database_url.config(default=f"sqlite:///{DATABASE_DEFAULT}")
 }
 
-AUTH_USER_MODEL = "client.Client"
+AUTH_USER_MODEL = "customer.Customer"
 
 
 # Password validation

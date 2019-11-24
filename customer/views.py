@@ -2,25 +2,25 @@
 
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from .models import Client
-from .serializers import ClientUpdateSerializer, ClientCreateSerializer
+from .models import Customer
+from .serializers import CustomerUpdateSerializer, CustomerCreateSerializer
 
 
-class ClientCreateView(generics.CreateAPIView):
+class CustomerCreateView(generics.CreateAPIView):
     """Create client generic view"""
-    serializer_class = ClientCreateSerializer
+    serializer_class = CustomerCreateSerializer
 
     def perform_create(self, serializer):
         """"Create user on django auth"""
         data = serializer.data
         data["username"] = data["name"]
-        Client.objects.create_user(**data)
+        Customer.objects.create_user(**data)
 
 
-class ClientUpdateView(generics.RetrieveUpdateDestroyAPIView):
+class CustomerUpdateView(generics.RetrieveUpdateDestroyAPIView):
     """Update client generic view"""
     permission_classes = [IsAuthenticated]
-    serializer_class = ClientUpdateSerializer
+    serializer_class = CustomerUpdateSerializer
 
     def get_object(self):
         """

@@ -1,24 +1,24 @@
 from django.urls import reverse
 
 
-def test_create_client_success(client, db, mock_client):
+def test_create_customer_success(client, db, mock_customer):
     """Test"""
-    url = reverse("client:create")
-    response = client.post(url, data=mock_client)
+    url = reverse("customer:create")
+    response = client.post(url, data=mock_customer)
     assert response.status_code == 201
 
 
-def test_create_client_error(client, db, mock_client):
+def test_create_customer_error(client, db, mock_customer):
     """Test"""
-    url = reverse("client:create")
-    mock_client.pop("email")
-    response = client.post(url, data=mock_client)
+    url = reverse("customer:create")
+    mock_customer.pop("email")
+    response = client.post(url, data=mock_customer)
     assert response.status_code == 400
 
 
-def test_get_client_success(client, db, mock_token):
+def test_get_customer_success(client, db, mock_token):
     """Test"""
-    url = reverse("client:crud")
+    url = reverse("customer:crud")
     response = client.get(url,
                           content_type='application/json',
                           **mock_token)
@@ -30,60 +30,60 @@ def test_get_client_success(client, db, mock_token):
     assert data["email"]
 
 
-def test_update_client_not_authorized(client, db):
+def test_update_customer_not_authorized(client, db):
     """Test"""
-    url = reverse("client:crud")
-    mock_client = {"name": "update_client"}
+    url = reverse("customer:crud")
+    mock_customer = {"name": "update_client"}
     mock_token = {'HTTP_AUTHORIZATION': '123'}
-    response = client.put(url, data=mock_client,
+    response = client.put(url, data=mock_customer,
                           content_type='application/json',
                           **mock_token)
     assert response.status_code == 401
 
 
-def test_update_client_success(client, db, mock_token):
+def test_update_customer_success(client, db, mock_token):
     """Test"""
-    url = reverse("client:crud")
-    mock_client = {"name": "update_client"}
-    response = client.put(url, data=mock_client,
+    url = reverse("customer:crud")
+    mock_customer = {"name": "update_client"}
+    response = client.put(url, data=mock_customer,
                           content_type='application/json',
                           **mock_token)
     assert response.status_code == 200
-    assert response.json()["name"] == mock_client["name"]
+    assert response.json()["name"] == mock_customer["name"]
 
 
-def test_update_client_error(client, db, mock_token):
+def test_update_customer_error(client, db, mock_token):
     """Test"""
-    url = reverse("client:crud")
-    mock_client = {"name": ""}
+    url = reverse("customer:crud")
+    mock_customer = {"name": ""}
     response = client.put(url, content_type='application/json',
-                          data=mock_client, **mock_token)
+                          data=mock_customer, **mock_token)
     assert response.status_code == 400
 
 
-def test_patch_client_success(client, db, mock_token):
+def test_patch_customer_success(client, db, mock_token):
     """Test"""
-    url = reverse("client:crud")
-    mock_client = {"name": "update_client"}
-    response = client.patch(url, data=mock_client,
+    url = reverse("customer:crud")
+    mock_customer = {"name": "update_client"}
+    response = client.patch(url, data=mock_customer,
                             content_type='application/json',
                             **mock_token)
     assert response.status_code == 200
-    assert response.json()["name"] == mock_client["name"]
+    assert response.json()["name"] == mock_customer["name"]
 
 
-def test_patch_client_error(client, db, mock_token):
+def test_patch_customer_error(client, db, mock_token):
     """Test"""
-    url = reverse("client:crud")
-    mock_client = {"name": ""}
+    url = reverse("customer:crud")
+    mock_customer = {"name": ""}
     response = client.patch(url, content_type='application/json',
-                            data=mock_client, **mock_token)
+                            data=mock_customer, **mock_token)
     assert response.status_code == 400
 
 
 def test_delete_not_authorized(client, db, mock_token):
     """Test"""
-    url = reverse("client:crud")
+    url = reverse("customer:crud")
     mock_token = {'HTTP_AUTHORIZATION': '123'}
     response = client.delete(url, content_type='application/json',
                              **mock_token)
@@ -92,7 +92,7 @@ def test_delete_not_authorized(client, db, mock_token):
 
 def test_delete_success(client, db, mock_token):
     """Test"""
-    url = reverse("client:crud")
+    url = reverse("customer:crud")
     response = client.delete(url, content_type='application/json',
                              **mock_token)
     assert response.status_code == 204
@@ -100,7 +100,7 @@ def test_delete_success(client, db, mock_token):
 
 def test_delete_and_access_item(client, db, mock_token):
     """Test"""
-    url = reverse("client:crud")
+    url = reverse("customer:crud")
     delete_resp = client.delete(url, content_type='application/json',
                                 **mock_token)
     response = client.get(url,
