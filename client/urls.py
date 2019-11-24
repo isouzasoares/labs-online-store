@@ -7,5 +7,5 @@ app_name = 'client'
 
 urlpatterns = [
     path('create/', ClientCreateView.as_view(), name='create'),
-    path('me/', ClientUpdateView.as_view(), name='update')
+    path('me/', ClientUpdateView.as_view(), name='crud')
 ]
