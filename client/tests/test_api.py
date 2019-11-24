@@ -79,3 +79,32 @@ def test_patch_client_error(client, db, mock_token):
     response = client.patch(url, content_type='application/json',
                             data=mock_client, **mock_token)
     assert response.status_code == 400
+
+
+def test_delete_not_authorized(client, db, mock_token):
+    """Test"""
+    url = reverse("client:crud")
+    mock_token = {'HTTP_AUTHORIZATION': '123'}
+    response = client.delete(url, content_type='application/json',
+                             **mock_token)
+    assert response.status_code == 401
+
+
+def test_delete_success(client, db, mock_token):
+    """Test"""
+    url = reverse("client:crud")
+    response = client.delete(url, content_type='application/json',
+                             **mock_token)
+    assert response.status_code == 204
+
+
+def test_delete_and_access_item(client, db, mock_token):
+    """Test"""
+    url = reverse("client:crud")
+    delete_resp = client.delete(url, content_type='application/json',
+                                **mock_token)
+    response = client.get(url,
+                          content_type='application/json',
+                          **mock_token)
+    assert delete_resp.status_code == 204
+    assert response.status_code == 401
