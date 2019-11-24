@@ -8,3 +8,6 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.URLField(max_length=200, null=True, blank=True)
     reviewScore = models.FloatField(default=0.0)
+
+    class Meta:
+        ordering = ["brand"]
