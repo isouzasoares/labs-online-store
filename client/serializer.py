@@ -5,7 +5,15 @@ from rest_framework.validators import UniqueValidator
 from .models import Client
 
 
-class ClientCreateSerializer(serializers.ModelSerializer):
+class ClientBaseSerializer(serializers.ModelSerializer):
+    """Serializer for user"""
+
+    class Meta:
+        model = Client
+        fields = ("id", "name", "email",)
+
+
+class ClientCreateSerializer(ClientBaseSerializer):
     """Serializer for create user"""
     email = serializers.EmailField(validators=[UniqueValidator(
         queryset=Client.objects.all(),
@@ -13,4 +21,9 @@ class ClientCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Client
-        fields = ("name", "email", "password",)
+        fields = ("id", "name", "email", "password")
+
+
+class ClientUpdateSerializer(ClientBaseSerializer):
+    """Serializer for user"""
+    email = serializers.ReadOnlyField()

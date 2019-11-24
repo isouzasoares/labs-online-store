@@ -15,3 +15,19 @@ def test_create_client_error(client, db, mock_client):
     mock_client.pop("email")
     response = client.post(url, data=mock_client)
     assert response.status_code == 400
+
+
+def test_update_client_sucess(client, db):
+    """Test"""
+    url = reverse("client:update")
+    mock_client = {"name": "update_client"}
+    response = client.put(url, data=mock_client)
+    assert response.status_code == 200
+
+
+def test_update_client_error(client, db):
+    """Test"""
+    url = reverse("client:update")
+    mock_client = {"name": ""}
+    response = client.put(url, data=mock_client)
+    assert response.status_code == 400
