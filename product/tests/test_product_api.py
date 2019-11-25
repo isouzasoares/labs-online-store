@@ -29,8 +29,7 @@ def test_product_list_not_items(db, client):
 def test_product_list_some_items(db, client):
     """Test"""
     url = reverse("product:list")
-    for item in range(200):
-        baker.make(Product)
+    baker.make(Product, 200)
     response = client.get(url)
     data = response.json()
     assert response.status_code == 200
@@ -41,8 +40,7 @@ def test_product_list_some_items(db, client):
 def test_product_list_with_pagination(db, client):
     """Test"""
     url = reverse("product:list")
-    for item in range(200):
-        baker.make(Product)
+    baker.make(Product, 200)
     response = client.get(url)
     data = response.json()
     assert response.status_code == 200
