@@ -13,7 +13,7 @@ from .serializers import (CustomerUpdateSerializer, CustomerCreateSerializer,
 
 
 class CustomerCreateView(generics.CreateAPIView):
-    """Create client generic view"""
+    """Create a new customer"""
 
     serializer_class = CustomerCreateSerializer
 
@@ -25,7 +25,7 @@ class CustomerCreateView(generics.CreateAPIView):
 
 
 class CustomerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    """Update client generic view"""
+    """Get or Update the logged customer"""
 
     permission_classes = [IsAuthenticated]
     serializer_class = CustomerUpdateSerializer
@@ -40,7 +40,7 @@ class CustomerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CustomerProductFavoriteView(generics.ListCreateAPIView):
-    """Post or list product favorites generic view"""
+    """Post or list product favorites for logged customer"""
 
     permission_classes = [IsAuthenticated]
     serializer_class = ProductSerializer
@@ -55,7 +55,7 @@ class CustomerProductFavoriteView(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         """
-        Delete or create favorite for customer
+        Delete or create favorite for logged customer
         If delete return 204 else 201
         """
         data = request.data

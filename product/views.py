@@ -6,14 +6,14 @@ from .serializers import ProductSerializer
 
 
 class ListProductView(generics.ListAPIView):
-    """Generic view for product list"""
+    """Lists all products registered in django admin"""
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
 class GetProductView(generics.RetrieveAPIView):
-    """Generic view for product detail"""
+    """Get the product detail"""
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer

@@ -20,14 +20,14 @@ If your are running the application for the first time, you should do first:
 
 `export DATABASE_URL=postgres://user:password@db:5432/database`
 
-If you do not configure the DATABASE_URL the system will use sqlite3.
+If you don`t configure the DATABASE_URL the system will use sqlite3.
 
 
 To update the local database schema you can use:
 
 `make migrate`
 
-Create django admin superuser for you to register products 
+Create django admin superuser for you to register/delete/update products 
 
 `make createsuperuser`
 
@@ -43,7 +43,14 @@ http://127.0.0.1:8000/api/swagger/
 
 ### Products administrator
 
+To create products you can use django admin (Use your superuser login):
 
+http://127.0.0.1:8000/admin/
+
+
+### API NOTE
+
+**For create customer, list products and get product the customer login is not necessary**
 
 
 # Tests
