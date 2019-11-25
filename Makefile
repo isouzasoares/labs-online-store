@@ -65,7 +65,7 @@ test_cov_html:
 
 .PHONY: flake8
 flake8:
-	flake8 --exclude */migrations,settings.py
+	pipenv run flake8 --exclude */migrations,settings.py
 
 
 .PHONY: createsuperuser
