@@ -21,6 +21,7 @@ pytest-django = "*"
 pytest-sugar = "*"
 pytest-cov = "*"
 black = "==19.3b0"
+codecov = "*"
 
 [requires]
 python_version = "3.7"
