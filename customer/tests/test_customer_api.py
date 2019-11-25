@@ -111,13 +111,68 @@ def test_delete_and_access_item(client, db, mock_token):
     assert response.status_code == 401
 
 
-def test_create_product_favorite_success(client, db, mock_token):
+def test_create_product_favorite_success(client, db, mock_token,
+                                         mock_favorite):
     """Test"""
-    url = reverse("customer:crud")
-    delete_resp = client.delete(
-        url, content_type="application/json", **mock_token
+    url = reverse("customer:favorite_product")
+    response = client.post(
+        url, data=mock_favorite, content_type="application/json",
+        **mock_token
     )
-    response = client.get(url, content_type="application/json",
-                          **mock_token)
+    assert response.status_code == 201
+
+
+def test_create_product_favorite_remove_success(client, db, mock_token,
+                                                mock_favorite):
+    """Test"""
+    url = reverse("customer:favorite_product")
+    response = client.post(
+        url, data=mock_favorite, content_type="application/json",
+        **mock_token
+    )
+    delete_resp = client.post(
+        url, data=mock_favorite, content_type="application/json",
+        **mock_token
+    )
+    assert response.status_code == 201
     assert delete_resp.status_code == 204
-    assert response.status_code == 401
+
+
+def test_product_favorite_list_success(client, db, mock_token,
+                                       mock_favorite):
+    """Test"""
+    url = reverse("customer:favorite_product")
+    client.post(
+        url, data=mock_favorite, content_type="application/json",
+        **mock_token
+    )
+    response = client.get(
+        url, content_type="application/json",
+        **mock_token
+    )
+    delete_resp = client.post(
+        url, data=mock_favorite, content_type="application/json",
+        **mock_token
+    )
+    response_deleted = client.get(
+        url, content_type="application/json",
+        **mock_token
+    )
+    assert response.status_code == 200
+    assert response.json()["count"] == 1
+    assert delete_resp.status_code == 204
+    assert response_deleted.json()["count"] == 0
+
+
+def test_product_favorite_list_create_not_login(client, db, mock_token,
+                                                mock_favorite):
+    """Test"""
+    url = reverse("customer:favorite_product")
+    post_response = client.post(
+        url, data=mock_favorite, content_type="application/json",
+    )
+    get_response = client.get(
+        url, content_type="application/json",
+    )
+    assert post_response.status_code == 401
+    assert get_response.status_code == 401

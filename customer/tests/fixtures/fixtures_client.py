@@ -20,3 +20,10 @@ def mock_token(django_user_model):
             "HTTP_AUTHORIZATION": f'Bearer {token.validated_data["access"]}'
         }
         return headers
+
+
+@pytest.fixture
+def mock_favorite(mock_product_model):
+    """Mock favorite json"""
+    product = mock_product_model
+    return {"product": product.id, "price": 1.0}
