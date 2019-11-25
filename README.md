@@ -1,4 +1,8 @@
-# Installation guide
+# Labs store
+
+[![Build Status](https://travis-ci.org/isouzasoares/labs-online-store.svg?branch=master)](https://travis-ci.org/isouzasoares/labs-online-store)
+
+## Installation guide
 
 ### Requirements
 
