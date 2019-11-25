@@ -4,6 +4,7 @@ python:
 install:
   - 'pip install pipenv'
   - 'pipenv sync'
-  - 'pipenv install --d'
+  - 'pipenv install -d'
 script:
   - make test_cov
+  - make flake8
