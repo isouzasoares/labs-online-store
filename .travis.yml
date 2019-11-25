@@ -7,4 +7,3 @@ install:
   - 'pipenv install --d'
 script:
   - make test_cov
-  - make flake8
