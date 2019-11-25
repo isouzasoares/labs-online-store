@@ -13,11 +13,12 @@ help:
 	@echo "   1. make clean 			- Clean all pyc and caches"
 	@echo "   2. make run				- Run application locally"
 	@echo "   3. make migrate 			- Run migrations"
-	@echo "   4. make test 			    - Run tests"
-	@echo "   5. make test_cov 			- Run tests"
-	@echo "   6. make black 			- Run black"
-	@echo "   7. make flake8		    - Run flake8"
-	@echo "   8. make docker_build		- Run docker compose build"
+	@echo "   4. make createsuperuser   - Create django superuser"
+	@echo "   5. make test 			    - Run tests"
+	@echo "   6. make test_cov 			- Run tests"
+	@echo "   7. make black 			- Run black"
+	@echo "   8. make flake8		    - Run flake8"
+	@echo "   9. make docker_build		- Run docker compose build"
 	@echo ""
 	@echo ""
 
@@ -40,6 +41,8 @@ run:
 .PHONY: migrate
 migrate:
 	pipenv run python manage.py runserver migrate
+
+
 .PHONY: black
 black:
 	pipenv run black -l 79 -t py37 . --exclude frontend
@@ -63,6 +66,13 @@ test_cov_html:
 .PHONY: flake8
 flake8:
 	flake8 --exclude */migrations,settings.py
+
+
+.PHONY: createsuperuser
+createsuperuser:
+	@echo $(PYTHONPATH)
+		pipenv run python manage.py createsuperuser
+
 
 docker_build: ## Build the container
 	docker-compose run web pipenv run python /app/manage.py migrate --noinput
