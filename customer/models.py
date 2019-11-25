@@ -25,6 +25,10 @@ class Customer(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username", "name"]
 
+    def __str__(self):
+        """Return str for object"""
+        return self.email
+
 
 class CustomerFavoriteProduct(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
