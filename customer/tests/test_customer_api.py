@@ -109,3 +109,15 @@ def test_delete_and_access_item(client, db, mock_token):
     response = client.get(url, content_type="application/json", **mock_token)
     assert delete_resp.status_code == 204
     assert response.status_code == 401
+
+
+def test_create_product_favorite_success(client, db, mock_token):
+    """Test"""
+    url = reverse("customer:crud")
+    delete_resp = client.delete(
+        url, content_type="application/json", **mock_token
+    )
+    response = client.get(url, content_type="application/json",
+                          **mock_token)
+    assert delete_resp.status_code == 204
+    assert response.status_code == 401
